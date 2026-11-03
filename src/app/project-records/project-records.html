@@ -1,0 +1,86 @@
+<h2>Project Records - MongoDB</h2>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="project-name">Project Name:</label>
+    <input
+      id="project-name"
+      type="text"
+      formControlName="projectName">
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input
+      id="description"
+      type="text"
+      formControlName="description">
+  </div>
+
+  <div>
+    <label for="startDate">Start Date:</label>
+    <input
+      id="startDate"
+      type="date"
+      formControlName="startDate">
+  </div>
+
+  <div>
+    <label for="projectDueDate">Due Date:</label>
+    <input
+      id="projectDueDate"
+      type="date"
+      formControlName="dueDate">
+  </div>
+
+  <div>
+    <label for="projectStatus">Status:</label>
+    <select id="projectStatus" formControlName="status">
+      <option value="Not Started">Not Started</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="projectTeamMember">Team Member:</label>
+    <input
+      id="projectTeamMember"
+      type="text"
+      formControlName="teamMember">
+  </div>
+
+  <div>
+    <label for="projectProgressNote">Progress Note:</label>
+    <input
+      id="projectProgressNote"
+      type="text"
+      formControlName="progressNote">
+  </div>
+
+  <button type="submit" [disabled]="projectForm.invalid">
+    {{ editingId ? 'Update Project' : 'Save Project' }}
+  </button>
+
+</form>
+
+<hr>
+
+@for (project of projects; track project._id) {
+  <div>
+    <h3>{{ project.projectName }}</h3>
+
+    <p>Description: {{ project.description }}</p>
+    <p>Start Date: {{ project.startDate }}</p>
+    <p>Due Date: {{ project.dueDate }}</p>
+    <p>Status: {{ project.status }}</p>
+    <p>Team Member: {{ project.teamMember }}</p>
+    <p>Progress Note: {{ project.progressNote }}</p>
+
+    <button type="button" (click)="onEdit(project)">Edit</button>
+    <button type="button" (click)="onDelete(project._id)">Delete</button>
+  </div>
+} @empty {
+  <p>No projects found.</p>
+}

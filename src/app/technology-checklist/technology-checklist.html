@@ -1,0 +1,8 @@
+<button
+    [disabled]="checklistComplete"
+    [innerText]="buttonName"
+    (click)="completeChecklist()"
+    (mouseover)="showMessage()">
+</button>
+
+<p>{{ hoverMessage }}</p>
